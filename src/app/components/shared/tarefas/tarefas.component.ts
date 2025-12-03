@@ -119,21 +119,18 @@ export class TarefasComponent {
 
     const isChecked = target.checked;
 
-    // Get current user ID from observable (take first value)
-    this.userContextFacade.userContext$.pipe(
+    // Get the active user ID for task operations (respects oversee state)
+    this.userContextFacade.activeUserForTasks$.pipe(
       take(1)
     ).subscribe({
-      next: (userContext) => {
-        const cdUsuario = userContext.userID;
-
+      next: (cdUsuario) => {
         if (!cdUsuario) {
-          console.error('User ID not available');
+          console.error('Active user ID not available');
           target.checked = !isChecked;
           return;
         }
 
         // Perform the status update through TaskStateService
-        // This automatically updates cache and categories
         const updateObservable = isChecked
           ? this.taskStateService.completeTask(tarefaId, cdUsuario)
           : this.taskStateService.reopenTask(tarefaId, cdUsuario);
@@ -143,14 +140,14 @@ export class TarefasComponent {
             // Cache is automatically updated by TaskStateService
           },
           error: (err) => {
-            console.error(`Error updating task status:`, err);
+            console.error('Error updating task status:', err);
             // Revert checkbox on error
             target.checked = !isChecked;
           }
         });
       },
       error: (err) => {
-        console.error('Error getting user context:', err);
+        console.error('Error getting active user for tasks:', err);
         target.checked = !isChecked;
       }
     });
