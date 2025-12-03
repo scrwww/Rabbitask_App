@@ -4,6 +4,30 @@
 /* Page-specific overrides for index-list (keep minimal) */
 /* This page acts as a container orchestrating list and calendar views */
 
+/* App Header with Logo */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg $spacing-xl;
+  padding-top: $spacing-xl;
+
+  .app-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .app-name {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-blue-100;
+    letter-spacing: -0.5px;
+  }
+}
+
 /* Error Banner */
 .error-banner {
   display: flex;
