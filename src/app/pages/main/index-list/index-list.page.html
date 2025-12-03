@@ -1,0 +1,76 @@
+<div id="Blockage" (click)="modalStateService.closeAllModals()" *ngIf="(modalStateService.showBlockingOverlay$ | async)"></div>
+<ion-content [fullscreen]="true" color="warning">
+  <!-- <main> -->
+
+    <!-- Oversee Indicator: Shows when viewing another user's tasks -->
+    <app-oversee-indicator></app-oversee-indicator>
+    
+    <div id="areaSearch">
+      <input 
+        type="search" 
+        placeholder="Pesquisar tarefas, tags, prazos..." 
+        id="searchBox"
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearchChange($event)">
+      <button *ngIf="searchQuery" class="btn-clear-search" (click)="clearSearch()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <!-- Error Display: Shows when task operations fail -->
+    <div class="error-banner" *ngIf="error$ | async as error">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <span>{{ error.message || 'Ocorreu um erro ao carregar as tarefas' }}</span>
+      <button (click)="clearError()">✕</button>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading-container" *ngIf="loading$ | async">
+      <ion-spinner name="crescent"></ion-spinner>
+      <span>Carregando tarefas...</span>
+    </div>
+
+    <ng-container *ngIf="currentView$ | async as currentView">
+      <ng-container *ngIf="taskCategories$ | async as taskCategories">
+
+        <!-- List View Component -->
+        <app-list-view
+          *ngIf="currentView === 'list'"
+          [tarefas]="taskCategories.all"
+          [tarefasAtrasadas]="taskCategories.delayed"
+          [tarefasPendentes]="taskCategories.pending"
+          [tarefasConcluidas]="taskCategories.completed">
+        </app-list-view>
+
+        <!-- Calendar View Component -->
+        <app-calendar-view
+          *ngIf="currentView === 'calendar'"
+          [tarefas]="taskCategories.all">
+        </app-calendar-view>
+
+        <!-- Timeline View Component -->
+        <app-timeline-view
+          *ngIf="currentView === 'timeline'"
+          [tarefas]="taskCategories.all">
+        </app-timeline-view>
+
+        <!-- Kanban View Component -->
+        <app-kanban-view
+          *ngIf="currentView === 'kanban'"
+          [tarefasAtrasadas]="taskCategories.delayed"
+          [tarefasPendentes]="taskCategories.pending"
+          [tarefasConcluidas]="taskCategories.completed">
+        </app-kanban-view>
+
+      </ng-container>
+    </ng-container>
+
+    <div id="padding01"></div>
+  <!-- </main> -->
+</ion-content>
+
+<!-- Footer Navigation -->
+<app-footer></app-footer>
+
+<!-- Modal Container - All modals are rendered here -->
+<app-modal-container></app-modal-container>

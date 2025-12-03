@@ -9,6 +9,10 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+@use 'sass:color';
+@use './theme/variables' as *;
+@use './app/shared/styles/common' as *;
+
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -35,3 +39,101 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+:root{
+    --mainBgColor: #{$color-bg-main};
+}
+
+*{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: $color-text-primary;
+}
+
+/* Standardized form inputs globally */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: $spacing-md;
+    background-color: $color-neutral-0;
+    border: 1px solid $color-border-secondary;
+    border-radius: $border-radius-md;
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+    font-family: inherit;
+    padding: $input-padding-v $input-padding-h;
+    height: $input-height-md;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+        color: $color-text-light;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $color-brown-80;
+        box-shadow: 0 0 0 3px rgba(194, 142, 96, 0.1);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background-color: $color-neutral-200;
+    }
+}
+
+
+
+ion-card{
+    box-shadow: none;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+    
+input[type=checkbox] + .checkBoxLbl:before {
+    content: "\2714";
+    border: 0.25em solid $color-text-secondary;
+    border-radius: 10px;
+    display: inline-block;
+    width: 0.9em;
+    height: 0.8em;
+    padding-left: 0.2em;
+    padding-bottom: 0.3em;
+    margin-right: 0.2em;
+    vertical-align: bottom;
+    color: transparent;
+    transition: .2s;
+}
+    
+input[type=checkbox] + .checkBoxLbl:active:before {
+    /* transform: scale(0); */
+}
+
+input[type=checkbox]:checked + .checkBoxLbl:before {
+    background-color: transparent;
+    border-color: $color-text-secondary;
+    color: $color-text-secondary;
+    font-weight: bolder;
+}
+    
+input[type=checkbox]:disabled + .checkBoxLbl:before {
+    /* transform: scale(1); */
+    border-color: #aaa;
+}
+    
+input[type=checkbox]:checked:disabled + .checkBoxLbl:before {
+    transform: scale(1);
+    background-color: #bfb;
+    border-color: #bfb;
+}

@@ -1,0 +1,95 @@
+@use '../../../../theme/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.tabMain {
+    align-items: flex-start;
+
+    & > div {
+        text-align: left;
+        width: 100%;
+    }
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+}
+
+.info-row {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+}
+
+.info-label {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: $font-size-md;
+    color: $color-text-primary;
+    font-weight: 600;
+}
+
+.profile-edit {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    width: 100%;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    label {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        font-weight: 500;
+    }
+
+    .tabInput {
+        @include input-base;
+        width: 100%;
+        padding: $spacing-sm $spacing-md;
+        border-radius: $border-radius-md;
+    }
+}
+
+.divBotoes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: $spacing-md;
+    padding: 0 $spacing-xl;
+    justify-content: center;
+    margin-top: $spacing-lg;
+}
+
+.tabButtons {
+    width: 100%;
+
+    &.edit-buttons {
+        display: flex;
+        gap: $spacing-md;
+        
+        button {
+            flex: 1;
+        }
+    }
+}
+
+.message-success {
+    @include message-success;
+    margin-bottom: $spacing-md;
+}
+
+.message-error {
+    @include message-error;
+    margin-bottom: $spacing-md;
+}

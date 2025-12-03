@@ -1,0 +1,69 @@
+@use '../../../../theme/variables' as *;
+@use 'sass:color';
+@use '../../../shared/styles/mixins' as *;
+
+.divBotoes {
+    display: flex;
+    width: 100%;
+    height: 85px;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xl;
+}
+
+.divBotoes > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: $spacing-sm;
+    border-radius: $border-radius-md;
+
+    &:hover {
+        transform: translateY(-2px);
+
+        .iconForm {
+            box-shadow: 0 4px 12px rgba(74, 139, 186, 0.3);
+        }
+    }
+
+    &.active {
+        .iconForm {
+            background-color: color.adjust($color-footer-btn-bg, $lightness: -10%);
+            border-color: color.adjust($color-footer-btn-border, $lightness: -10%);
+            box-shadow: 0 2px 8px rgba(74, 139, 186, 0.4);
+        }
+
+        p {
+            font-weight: 600;
+        }
+    }
+}
+
+// Override iconForm to match footer button styling
+.iconForm {
+    min-width: 41px;
+    max-width: 41px;
+    min-height: 41px;
+    max-height: 41px;
+    background-color: $color-footer-btn-bg;
+    border: 1px solid $color-footer-btn-border;
+    border-radius: 12px;
+    color: $color-neutral-0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.divBotoes > div > p {
+    margin: $spacing-xs 0 0 0;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $color-text-secondary;
+    transition: all 0.3s ease;
+}

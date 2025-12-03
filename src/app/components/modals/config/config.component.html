@@ -1,0 +1,53 @@
+<div id="TabConfig" class="Tab">
+  <form>
+    <header class="tabHeader">
+      <h2>Configurações</h2>
+    </header>
+
+    <div class="tabMain">
+      <!-- Account Section - Common to both user types -->
+      <div class="config-section">
+        <h3>Conta</h3>
+        <div class="config-item" (click)="mostrarTab('Conta')">
+          <div class="iconForm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-person" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+            </svg>
+          </div>
+          <p>Editar Perfil</p>
+        </div>
+      </div>
+
+      <!-- Conexões Section - Only for Agente users -->
+      <div *ngIf="isAgente" class="config-section">
+        <h3>Conexões</h3>
+        <div class="config-item" (click)="mostrarTab('Conexoes')">
+          <div class="iconForm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-diagram-3" viewBox="0 0 16 16">
+              <path d="M6 3h6v2H6z"/>
+              <path d="M3 5.5h2V8H3z"/>
+              <path d="M11 5.5h2V8h-2z"/>
+              <path d="M3 11h2v2.5H3z"/>
+              <path d="M11 11h2v2.5h-2z"/>
+            </svg>
+          </div>
+          <p>Gerenciar Conexões</p>
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <div class="config-section">
+        <div class="config-item logout-item" (click)="logout()">
+          <div class="iconForm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+              <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708l2.147-2.146H4.5a.5.5 0 0 1 0-1h10.293L12.146 4.854a.5.5 0 0 1 .708-.708l3 3z"/>
+            </svg>
+          </div>
+          <p>Sair</p>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

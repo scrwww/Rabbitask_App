@@ -1,0 +1,196 @@
+@use '../../../../theme/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+// Set background color for the page
+::ng-deep ion-content {
+  --background: #{$color-bg-main};
+}
+
+// Compact form layout
+.registration-form {
+  input, textarea, select {
+    margin-bottom: 0 !important;
+    height: $input-height-sm !important;
+  }
+  label { margin-bottom: 2px !important; }
+}
+
+// Form field wrapper
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2px;
+}
+
+// Override .Tab for login/register pages
+.Tab {
+  position: fixed;
+  bottom: 0;
+  height: 60vh;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  
+  .registration-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .tabMain {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+// Step indicators
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  span {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: $font-size-sm;
+    background-color: $color-neutral-200;
+    color: $color-text-light;
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: $color-btn-primary;
+      color: $color-neutral-0;
+    }
+  }
+}
+
+// Form steps
+.form-step {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+
+  .step-title {
+    margin: 0 0 $spacing-xs 0;
+    font-size: $font-size-md;
+    font-weight: 700;
+    color: $color-text-primary;
+    text-align: center;
+  }
+}
+
+// Secondary button
+.tabBtnSecondary {
+  @include button-secondary;
+  width: 100%;
+  max-width: 150px;
+  height: $button-height-md;
+  margin-bottom: 0 !important;
+}
+
+.tabButtons button { margin-bottom: 0 !important; }
+
+// Logo section
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-lg;
+  height: 25vh;
+  padding-top: $spacing-xl;
+
+  h2 {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-btn-primary;
+  }
+}
+
+.logo-small {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+// User type selection
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2xl;
+  padding: $spacing-2xl;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #{$color-light-blue-20} 0%, #{$color-cream-20} 100%);
+
+  h2 {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $color-text-primary;
+    text-align: center;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.type-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  width: 100%;
+  max-width: 280px;
+  padding: $spacing-2xl;
+  border: 3px solid $color-border-secondary;
+  border-radius: $border-radius-xl;
+  background-color: $color-neutral-0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  &:hover:not(:disabled) {
+    border-color: $color-btn-primary;
+    box-shadow: 0 8px 24px rgba(119, 168, 204, 0.2);
+    transform: translateY(-4px);
+  }
+
+  &.selected {
+    border-color: $color-btn-primary;
+    background-color: rgba(119, 168, 204, 0.05);
+    box-shadow: 0 8px 24px rgba(119, 168, 204, 0.3);
+  }
+
+  .icon { font-size: 3rem; }
+  h3 { margin: 0; font-size: $font-size-md; font-weight: 700; color: $color-text-primary; }
+  p { margin: 0; font-size: $font-size-sm; color: $color-text-light; text-align: center; }
+}
+
+// Login link at bottom
+.registration-form > .tabMain:last-of-type {
+  flex: 0 !important;
+  padding: $spacing-xs $spacing-md !important;
+  gap: 0 !important;
+  margin-top: $spacing-lg;
+
+  p {
+    margin: 0;
+    font-size: $font-size-xs;
+    text-align: center;
+    line-height: 1.2;
+
+    a { text-decoration: none; color: $color-btn-primary; }
+  }
+}

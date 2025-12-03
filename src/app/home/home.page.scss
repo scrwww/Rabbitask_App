@@ -1,27 +1,77 @@
-#container {
+@use '../../theme/variables' as *;
+@use '../shared/styles/mixins' as *;
+
+::ng-deep ion-content {
+  --background: #{$color-bg-main};
+}
+
+.signup-text {
+  font-size: $font-size-md;
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+// Form field wrapper
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2px;
+
+  input { margin-bottom: 0 !important; }
+  label { margin-bottom: 2px !important; }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+// Logo section
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-lg;
+  height: 40vh;
+  padding-top: $spacing-2xl;
 
-  color: #8c8c8c;
-
-  margin: 0;
+  h2 {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $color-btn-primary;
+  }
 }
 
-#container a {
-  text-decoration: none;
+.logo-small {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+// Override .Tab for login page
+.Tab {
+  position: fixed;
+  bottom: 0;
+  height: 60vh;
+  border-radius: 0;
+}
+
+// Login form styles
+form {
+  height: 100%;
+
+  .tabMain { overflow: visible !important; }
+
+  .tabMain:last-of-type {
+    flex: 0 !important;
+    padding: $spacing-xs $spacing-md !important;
+    gap: 0 !important;
+    margin-top: $spacing-lg;
+
+    p {
+      margin: 0;
+      font-size: $font-size-xs;
+      text-align: center;
+      line-height: 1.2;
+
+      a { text-decoration: none; color: $color-btn-primary; }
+    }
+  }
 }

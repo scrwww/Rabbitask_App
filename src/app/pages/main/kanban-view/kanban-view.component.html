@@ -1,0 +1,57 @@
+<div class="kanban-view">
+  <div class="kanban-container">
+    <!-- Atrasadas Column -->
+    <div class="kanban-column column-delayed">
+      <div class="column-header">
+        <h3>Atrasadas</h3>
+        <span class="task-count">{{ tarefasAtrasadas.length }}</span>
+      </div>
+      <div class="column-content">
+        <div class="empty-column" *ngIf="tarefasAtrasadas.length === 0">
+          <p>Nenhuma tarefa atrasada</p>
+        </div>
+        <app-tarefas 
+          *ngIf="tarefasAtrasadas.length > 0"
+          [tarefas]="tarefasAtrasadas" 
+          [tarefaCSS]="Atrasada">
+        </app-tarefas>
+      </div>
+    </div>
+
+    <!-- Pendentes Column -->
+    <div class="kanban-column column-pending">
+      <div class="column-header">
+        <h3>Pendentes</h3>
+        <span class="task-count">{{ tarefasPendentes.length }}</span>
+      </div>
+      <div class="column-content">
+        <div class="empty-column" *ngIf="tarefasPendentes.length === 0">
+          <p>Nenhuma tarefa pendente</p>
+        </div>
+        <app-tarefas 
+          *ngIf="tarefasPendentes.length > 0"
+          [tarefas]="tarefasPendentes" 
+          [tarefaCSS]="Pendente">
+        </app-tarefas>
+      </div>
+    </div>
+
+    <!-- Concluídas Column -->
+    <div class="kanban-column column-completed">
+      <div class="column-header">
+        <h3>Concluídas</h3>
+        <span class="task-count">{{ tarefasConcluidas.length }}</span>
+      </div>
+      <div class="column-content">
+        <div class="empty-column" *ngIf="tarefasConcluidas.length === 0">
+          <p>Nenhuma tarefa concluída</p>
+        </div>
+        <app-tarefas 
+          *ngIf="tarefasConcluidas.length > 0"
+          [tarefas]="tarefasConcluidas" 
+          [tarefaCSS]="Concluida">
+        </app-tarefas>
+      </div>
+    </div>
+  </div>
+</div>

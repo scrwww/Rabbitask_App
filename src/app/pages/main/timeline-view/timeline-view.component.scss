@@ -1,0 +1,145 @@
+@use '../../../../theme/variables' as *;
+@use 'sass:color';
+
+.timeline-view {
+  padding: $spacing-lg;
+  min-height: 100%;
+}
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-4xl;
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: 70px;
+}
+
+// The vertical line running through the timeline
+.timeline-line {
+  position: absolute;
+  left: 35px;
+  top: 25px;
+  bottom: 40px;
+  width: 4px;
+  background: $color-blue-40;
+  border-radius: 2px;
+
+  // Top stub
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: $color-blue-60;
+    border-radius: 50%;
+  }
+
+  // Bottom stub
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: $color-blue-60;
+    border-radius: 50%;
+  }
+}
+
+.day-group {
+  position: relative;
+  margin-bottom: $spacing-lg;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// The circular day marker
+.day-marker {
+  position: absolute;
+  left: -70px;
+  top: 0;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.day-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: $color-light-blue-60;
+  border: 3px solid $color-blue-60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.day-number {
+  font-size: $font-size-lg;
+  font-weight: 700;
+  color: $color-blue-100;
+  line-height: 1;
+}
+
+.day-month {
+  font-size: $font-size-xs;
+  font-weight: 600;
+  color: $color-blue-80;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.day-tasks {
+  padding-left: $spacing-md;
+}
+
+.timeline-task {
+  margin-bottom: $spacing-sm;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  // Override the tarefas component margin for timeline
+  :host ::ng-deep .tarefa {
+    margin-bottom: 0;
+  }
+
+  // Add a small connector line from the vertical line to each task
+  &::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    width: 35px;
+    height: 2px;
+    background: $color-blue-40;
+    top: 40px;
+  }
+
+  position: relative;
+}
+
+// Visual indicator for completed tasks
+.timeline-task.completed {
+  opacity: 0.8;
+  
+  &::before {
+    background: $color-neutral-500;
+  }
+}

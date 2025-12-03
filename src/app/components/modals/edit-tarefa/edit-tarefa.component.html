@@ -1,0 +1,66 @@
+<div id="TabNovaTarefa" class="Tab">
+  <form action="">
+      <header class="tabHeader">
+          <h2>Editar Tarefa</h2>
+      </header>
+      <div class="tabMain">
+          <div class="form-field">
+              <label for="txtNomeTarefa">Nome:</label>
+              <input type="text" class="tabInput" [(ngModel)]="editNome" name="txtNomeTarefa" placeholder="Lição de Casa" id="txtNomeTarefa" aria-describedby="txtNomeTarefaHelp">
+              <span id="txtNomeTarefaHelp" class="spanHelper">Dê um nome a sua tarefa</span>
+          </div>
+
+          <div class="form-field">
+              <label for="txtPrioridadeTarefa">Nivel de Prioridade:</label>
+              <select class="tabInput" [(ngModel)]="editCdPrioridade" name="txtPrioridadeTarefa" id="txtPrioridadeTarefa" aria-describedby="txtPrioridadeTarefaHelp">
+                  <option value="1">Super Alta</option>
+                  <option value="2">Alta</option>
+                  <option value="3">Média Alta</option>
+                  <option value="4">Média</option>
+                  <option value="5">Média Baixa</option>
+                  <option value="6">Baixa</option>
+                  <option value="7">Super Baixa</option>
+              </select>
+              <span id="txtPrioridadeTarefaHelp" class="spanHelper">Escolha o nível de prioridade</span>
+          </div>
+
+          <div class="form-field">
+              <label for="txtDescTarefa">Descrição:</label>
+              <textarea class="tabInput descricaoInput" [(ngModel)]="editDescricao" name="txtDescTarefa" placeholder="Realizar páginas 182 ~ 186 de português" id="txtDescTarefa" aria-describedby="txtDescTarefaHelp" (input)="onDescriptionInput($event)"></textarea>
+              <span id="txtDescTarefaHelp" class="spanHelper">Descreva o que precisa ser feito com mais detalhes</span>
+          </div>
+
+          <div class="form-field">
+              <label for="txtTagsTarefa">Adicionar Tags:</label>
+              <input type="text" [(ngModel)]="editTagNomes" name="txtTagsTarefa" class="tabInput" placeholder="Escolar, Trabalho, Matematica etc.." id="txtTagsTarefa" aria-describedby="txtTagsTarefaHelp">
+              <span id="txtTagsTarefaHelp" class="spanHelper">Adicione tags para organizar</span>
+          </div>
+
+          <div class="form-field">
+              <label>Data e Horário:</label>
+              <ion-datetime-button datetime="editDateTimePicker" id="editDateTimeButton">
+                  <span slot="date-target">{{ editDateTime ? (editDateTime | date:'dd/MM/yyyy') : '📅 Selecionar Data' }}</span>
+                  <span slot="time-target">{{ editDateTime ? (editDateTime | date:'HH:mm') : '⏰ Selecionar Hora' }}</span>
+              </ion-datetime-button>
+              <span class="spanHelper">Defina a data e hora de vencimento</span>
+          </div>
+    </div>
+    <div class="tabButtons">
+        <button class="tabBtnAzul" (click)="editarTarefa()">Salvar Tarefa</button>
+    </div>
+  </form>
+
+  <ion-popover [keepContentsMounted]="true" [trigger]="'editDateTimeButton'" [dismissOnSelect]="true">
+    <ng-template>
+      <ion-content class="ion-padding">
+        <ion-datetime 
+          id="editDateTimePicker"
+          [(ngModel)]="editDateTime" 
+          presentation="date-time"
+          [max]="maxDate"
+          (ionChange)="onDateTimeChange($event)">
+        </ion-datetime>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+</div>  

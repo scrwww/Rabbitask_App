@@ -1,0 +1,34 @@
+<div class="list-view">
+  <ion-card color="warning" *ngIf="tarefasAtrasadas.length == 0 && tarefasPendentes.length == 0 && tarefasConcluidas.length == 0">
+    <ion-card-content>
+      <p>Nenhuma tarefa pendente</p> 
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="warning"  *ngIf="tarefasAtrasadas.length > 0">
+    <ion-card-header>
+      <ion-card-title>Tarefas Atrasadas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="tarefas.length > 0">
+      <app-tarefas [tarefas]="tarefasAtrasadas" [tarefaCSS]="Atrasada"></app-tarefas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="warning"  *ngIf="tarefasPendentes.length > 0">
+    <ion-card-header>
+      <ion-card-title>Tarefas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="tarefas.length > 0">
+      <app-tarefas [tarefas]="tarefasPendentes" [tarefaCSS]="Pendente"></app-tarefas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="warning"  *ngIf="tarefasConcluidas.length > 0">
+    <ion-card-header>
+      <ion-card-title>Tarefas Concluídas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content  *ngIf="tarefas.length > 0">
+      <app-tarefas [tarefas]="tarefasConcluidas" [tarefaCSS]="Concluida"></app-tarefas>
+    </ion-card-content>
+  </ion-card>
+</div>

@@ -1,0 +1,71 @@
+<div id="TabTarefaDetalhe" class="Tab">
+  <div class="tarefa-detalhe-container">
+    <!-- Header with Delete Button -->
+    <div class="detalhe-header">
+      <h2>{{ tarefa?.nome }}</h2>
+      <button class="btn-delete" (click)="onDeleteClick()" title="Excluir tarefa">
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+
+    <!-- Delete Confirmation Dialog -->
+    <div class="delete-confirm-overlay" *ngIf="showDeleteConfirm">
+      <div class="delete-confirm-dialog">
+        <div class="delete-confirm-icon">
+          <i class="bi bi-exclamation-triangle"></i>
+        </div>
+        <h3>Excluir Tarefa?</h3>
+        <p>Tem certeza que deseja excluir "{{ tarefa?.nome }}"? Esta ação não pode ser desfeita.</p>
+        <div class="delete-error" *ngIf="deleteError">{{ deleteError }}</div>
+        <div class="delete-confirm-actions">
+          <button class="btn-cancel" (click)="cancelDelete()" [disabled]="isDeleting">Cancelar</button>
+          <button class="btn-confirm-delete" (click)="confirmDelete()" [disabled]="isDeleting">
+            {{ isDeleting ? 'Excluindo...' : 'Excluir' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Badge -->
+    <div class="status-badge" [ngClass]="'status-' + getStatusColor()">
+      <span>{{ getStatusText() }}</span>
+    </div>
+
+    <!-- Priority -->
+    <div class="detalhe-section">
+      <h3>Prioridade</h3>
+      <div class="prioridade-display">
+        <div class="prioridade-color" [style.background-color]="getPrioridadeColor()"></div>
+        <span class="prioridade-nome">{{ prioridadeNome }}</span>
+      </div>
+    </div>
+
+    <!-- Deadline -->
+    <div class="detalhe-section">
+      <h3>Prazo</h3>
+      <p class="deadline">{{ tarefa?.dataPrazo | date:'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+
+    <!-- Description -->
+    <div class="detalhe-section">
+      <h3>Descrição</h3>
+      <p class="descricao">{{ tarefa?.descricao || 'Sem descrição' }}</p>
+    </div>
+
+    <!-- Tags -->
+    <div class="detalhe-section" *ngIf="tarefa?.tags && tarefa?.tags?.length! > 0">
+      <h3>Tags</h3>
+      <div class="tags-list">
+        <span class="tag" *ngFor="let tag of tarefa?.tags!">{{ tag.nome }}</span>
+      </div>
+    </div>
+
+    <!-- Edit Button -->
+    <div class="detalhe-actions" *ngIf="!tarefa?.dataConclusao">
+      <button class="tabBtnAzul" (click)="onEditClick()">
+        <i class="bi bi-pencil"></i>
+        Editar Tarefa
+      </button>
+    </div>
+  </div>
+</div>

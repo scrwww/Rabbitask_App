@@ -1,0 +1,28 @@
+<footer>
+  <div class="footerButtonDiv" (click)="modalStateService.openModal('NovaTarefa')">
+    <div class="buttonFooter"><i class="bi bi-plus-lg"></i></div>
+    <p class="t1">Nova Tarefa</p>
+  </div>
+
+  <div class="footerButtonDiv" (click)="modalStateService.openModal('Visual')">
+    <div class="buttonFooter"><i class="bi bi-view-list"></i></div>
+    <p class="t1">Visualização</p>
+  </div>
+
+  <!-- Conexões button: Only visible for Agentes AND when not viewing a connected user -->
+  <div *ngIf="isAgente && !isViewingConnectedUser" class="footerButtonDiv" (click)="modalStateService.openModal('Conexoes')">
+    <div class="buttonFooter"><i class="bi bi-diagram-3"></i></div>
+    <p class="t1">Conexões</p>
+  </div>
+
+  <!-- Conexões button: Only visible for Comum users -->
+  <div *ngIf="isComum" class="footerButtonDiv" (click)="modalStateService.openModal('Conexoes')">
+    <div class="buttonFooter"><i class="bi bi-diagram-3"></i></div>
+    <p class="t1">Conexões</p>
+  </div>
+
+  <div class="footerButtonDiv" (click)="modalStateService.openModal('Config')">
+    <div class="buttonFooter"><i class="bi bi-gear-wide-connected"></i></div>
+    <p class="t1">Configurações</p>
+  </div>
+</footer>

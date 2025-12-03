@@ -1,0 +1,20 @@
+<div [class]="'tarefa ' + tarefaCSS" *ngFor="let tarefa of tarefas" (click)="onTarefaClick($event, tarefa)">
+  <div class="textoTarefa">
+      <h5>{{ tarefa.nome }}</h5>
+      <div class="tagsEHorarios">
+          <p class="HoraTarefa">{{ tarefa.dataPrazo | date:'dd/MM/yy - HH:mm' }}</p>
+          <p class="TagTarefa" *ngFor="let tag of tarefa.tags">{{ tag.nome }}</p>
+      </div>
+  </div>
+  <div class="checkboxTarefa">
+    <input type="checkbox" 
+      [name]="'ckbTarefa' + tarefa.cd" 
+      [id]="'ckbTarefa' + tarefa.cd" 
+      [checked]="isTaskCompleted(tarefa)"
+      (change)="atualizarTarefa($event)"
+      [attr.data-task-id]="tarefa.cd"
+      [attr.data-user-id]="tarefa.usuario.cd">
+    <label [for]="'ckbTarefa' + tarefa.cd" class="checkBoxLbl"></label>
+  </div>
+</div>
+

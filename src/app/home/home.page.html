@@ -1,20 +1,39 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="logo-section">
+    <img src="assets/logo/RabbitaskLogoDark.png" alt="Rabbitask" class="logo-small">
+    <h2>Rabbitask</h2>
+  </div>
+  <div class="Tab">
+    <form (ngSubmit)="login()">
+      <header class="tabHeader">
+      </header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <div class="tabMain">
+        <div *ngIf="errorMessage" class="alert-error">
+          {{ errorMessage }}
+        </div>
+
+        <div class="form-field">
+          <label for="email" class="leftSide">Email</label>
+          <input type="email" [(ngModel)]="email" name="email" placeholder="Digite seu Email" id="email"
+            [disabled]="isLoading" class="tabInput">
+        </div>
+
+        <div class="form-field">
+          <label for="senha" class="leftSide">Senha</label>
+          <input type="password" [(ngModel)]="senha" name="senha" placeholder="Digite sua Senha" id="senha"
+            [disabled]="isLoading" class="tabInput">
+        </div>
+      </div>
+
+      <div class="tabButtons">
+        <button class="tabBtnAzul" type="submit" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Entrar</span>
+          <span *ngIf="isLoading">Carregando...</span>
+        </button>
+      </div>
+
+        <p class="signup-text">Não tem uma conta? <a [routerLink]="['/cadastrar']">Crie a sua</a></p>
+    </form>
   </div>
 </ion-content>

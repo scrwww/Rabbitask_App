@@ -1,0 +1,272 @@
+@use '../../../../theme/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.tarefa-detalhe-container {
+  max-width: 100%;
+}
+
+.detalhe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-xl;
+  padding-bottom: $spacing-lg;
+  border-bottom: 2px solid $color-neutral-300;
+
+  h2 {
+    margin: 0;
+    flex: 1;
+    color: $color-text-primary;
+    font-size: $font-size-lg;
+    font-weight: 600;
+    word-break: break-word;
+  }
+}
+
+// Delete button in header
+.btn-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: $color-red-20;
+  border: 1px solid $color-red-60;
+  border-radius: $border-radius-md;
+  color: $color-red-100;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-left: $spacing-md;
+
+  i {
+    font-size: 18px;
+  }
+
+  &:hover {
+    background: $color-red-40;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Delete confirmation overlay
+.delete-confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.delete-confirm-dialog {
+  background: $color-neutral-0;
+  border-radius: $border-radius-lg;
+  padding: $spacing-2xl;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  .delete-confirm-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto $spacing-lg;
+    background: $color-red-20;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 28px;
+      color: $color-red-100;
+    }
+  }
+
+  h3 {
+    margin: 0 0 $spacing-md 0;
+    color: $color-text-primary;
+    font-size: $font-size-lg;
+  }
+
+  p {
+    margin: 0 0 $spacing-lg 0;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+    line-height: 1.5;
+  }
+}
+
+.delete-error {
+  background: $color-red-20;
+  color: $color-red-100;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-md;
+  font-size: $font-size-xs;
+}
+
+.delete-confirm-actions {
+  display: flex;
+  gap: $spacing-md;
+  justify-content: center;
+
+  button {
+    flex: 1;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $border-radius-md;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-cancel {
+    background: $color-neutral-300;
+    border: 1px solid $color-neutral-500;
+    color: $color-text-primary;
+
+    &:hover:not(:disabled) {
+      background: $color-neutral-400;
+    }
+  }
+
+  .btn-confirm-delete {
+    background: $color-red-60;
+    border: 1px solid $color-red-100;
+    color: $color-neutral-0;
+
+    &:hover:not(:disabled) {
+      background: $color-red-100;
+    }
+  }
+}
+
+// Status Badge - consolidated styles
+.status-badge {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $border-radius-full;
+  font-weight: 600;
+  font-size: $font-size-xs;
+  margin-bottom: $spacing-xl;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &.status-completed {
+    background-color: $color-task-completed;
+    color: $color-neutral-0;
+    border: 1px solid $color-neutral-600;
+  }
+
+  &.status-delayed {
+    background-color: $color-task-delayed;
+    color: $color-red-100;
+    border: 1px solid $color-red-60;
+  }
+
+  &.status-pending {
+    background-color: $color-blue-40;
+    color: $color-blue-100;
+    border: 1px solid $color-blue-60;
+  }
+}
+
+// Section styling
+.detalhe-section {
+  margin-bottom: $spacing-xl;
+  padding: $spacing-lg;
+  background-color: $color-neutral-200;
+  border-radius: $border-radius-md;
+  border-left: 4px solid $color-blue-60;
+
+  h3 {
+    margin: 0 0 $spacing-sm 0;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $color-blue-60;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    margin: 0;
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+    line-height: $line-height-sm;
+  }
+}
+
+// Priority Display
+.prioridade-display {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.prioridade-color {
+  width: $size-icon-md;
+  height: $size-icon-md;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.prioridade-nome {
+  font-weight: 600;
+  color: $color-text-primary;
+}
+
+.deadline {
+  font-size: $font-size-md;
+  font-weight: 500;
+  color: $color-blue-60;
+}
+
+.descricao {
+  white-space: pre-wrap;
+  padding-right: $spacing-sm;
+  max-height: 100px;
+  overflow: scroll;
+  word-break: break-word;
+  color: $color-text-secondary;
+}
+
+// Tags
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.tag {
+  display: inline-block;
+  padding: $spacing-xs $spacing-md;
+  background-color: $color-blue-60;
+  color: $color-neutral-0;
+  border-radius: $border-radius-full;
+  font-size: $font-size-xs;
+  font-weight: 500;
+}
+
+// Actions
+.detalhe-actions {
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: $spacing-2xl;
+  padding-top: $spacing-lg;
+  border-top: 2px solid $color-neutral-300;
+}

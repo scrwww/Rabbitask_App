@@ -1,0 +1,21 @@
+@use '../../../../theme/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+ion-datetime-button {
+    width: 100%;
+    --background: transparent;
+    --border-radius: #{$border-radius-md};
+    display: block;
+    min-height: $input-height-md;
+    --padding-start: #{$input-padding-h};
+    --padding-end: #{$input-padding-h};
+    --padding-top: #{$input-padding-v};
+    --padding-bottom: #{$input-padding-v};
+}
+
+// Description textarea
+.descricaoInput {
+    max-height: 120px;
+    overflow-y: auto;
+    resize: vertical;
+}

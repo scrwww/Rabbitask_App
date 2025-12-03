@@ -1,0 +1,414 @@
+@use 'sass:color';
+@use '../../../theme/variables' as *;
+@use './mixins' as *;
+@forward '../../../theme/variables';
+@forward './mixins';
+
+/**
+ * GLOBAL STYLES - Included via global.scss
+ * These styles are applied once globally, not per-component.
+ * Components should import _mixins.scss directly for component-specific needs.
+ */
+
+/* Layout helpers */
+#Blockage{
+  z-index: 100;
+  position: fixed;
+  background-color: $color-shadow-light;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: all;
+}
+
+main, #mainContent{
+  padding: 20px;
+  padding-bottom: 180px;
+  min-height: calc(100vh + 20px);
+  box-sizing: border-box;
+}
+
+#padding01{padding-bottom:80px;}
+
+/* Search area */
+#areaSearch{
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+#searchBox {
+  position: relative;
+  z-index: 5;
+  width: 90%;
+  height: 50px;
+  padding-left: 20px;
+  padding-right: 50px;
+  @include input-base;
+  border-radius: $border-radius-xl;
+}
+
+.btn-clear-search {
+  position: absolute;
+  z-index: 10;
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 16px;
+  color: $color-text-secondary;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: $color-text-primary;
+  }
+}
+
+#btnSearch {
+  position: absolute;
+  z-index: 10;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: $color-brown-80;
+  border: 0px;
+  width: 32px;
+  height: 32px;
+  border-radius: $border-radius-lg;
+  font-size: 18px;
+  color: $color-neutral-0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: color.adjust($color-brown-80, $lightness: -10%);
+    transform: translateY(calc(-50% - 2px));
+  }
+
+  &:active {
+    transform: translateY(-50%);
+  }
+}
+
+#sectionTarefas{padding-bottom: 90px;}
+
+/* Tags */
+#areaTags{display: flex; gap: 20px; padding-bottom: 20px;}
+.tagSearch{
+  background-color: $color-tab-label-bg;
+  color: $color-tab-label-text;
+  padding: 5px 15px;
+  border-radius: 200px;
+}
+.tagSearch p{margin: 0;}
+
+/* Tarefa card */
+.tarefa{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 80px;
+  color: $color-text-secondary;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  border-radius: 20px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  box-shadow: 0px 4px 4px 0px $color-shadow;
+}
+
+.tarefaAtrasada{background-color: $color-task-delayed;}
+.tarefaNaoConcluida{background-color: $color-task-pending;}
+.tarefaConcluida{background-color: $color-task-completed;}
+
+.textoTarefa{margin-right: auto;}
+.textoTarefa > h5{margin: 0;}
+
+.tagsEHorarios{display: flex;}
+.tagsEHorarios > p{
+  padding: 0px 10px 0px 0px;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 5px 0 0 0 ;
+}
+
+/* Footer */
+footer{
+  display: flex;
+  position: fixed;
+  background-color: $color-footer-bg;
+  bottom: 0;
+  width: 100%;
+  height: 90px;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+footer > div{display: flex; flex-direction: column; align-items: center; width: 100px;}
+footer p{font-size: 12px; line-height: 15px; color: $color-neutral-0; margin-top: 5px; margin-bottom: 3px;}
+
+.buttonFooter {
+  width: $size-icon-md;
+  height: $size-icon-md;
+  background-color: $color-footer-btn-bg;
+  border: 1px solid $color-footer-btn-border;
+  border-radius: $border-radius-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 139, 186, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  & > i {
+    color: $color-neutral-0;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Generic link color */
+a{ color: $color-link; }
+
+/* Tabs */
+.Tab {
+  width: 100%;
+  max-height: 85vh;
+  border-radius: 15px 15px 0 0;
+  background-color: $color-tab-bg;
+  z-index: 200;
+  position: fixed;
+  bottom: calc(0vh + 90px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-xl;
+  box-sizing: border-box;
+}
+
+.Tab::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+input[type="button"], button {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tabHeader {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin-bottom: $spacing-lg;
+}
+
+.tabHeaderAtraso {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.tabMain {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.leftSide {
+  margin-right: auto;
+}
+
+.spanHelper {
+  position: relative;
+  bottom: 10px;
+  font-size: small;
+  color: $color-text-secondary;
+}
+
+.divHeaderTab {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divHeaderTab .tabName {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 70px);
+}
+
+.tabInput {
+  width: 100%;
+}
+
+.divHeaderTab .iconTarefa,
+.tabHeaderAtraso .iconTarefa {
+  background-color: $color-task-pending-icon-bg;
+  border: $color-task-pending-icon-border solid 2px;
+}
+
+.divTimerTab {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.divTimerTab div {
+  width: 47%;
+  flex-direction: column;
+}
+
+.tabButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+}
+
+.tabButtons .anchorBtnTab01 {
+  width: 100%;
+}
+
+.tabButtons .anchorBtnTab02 {
+  width: 48%;
+}
+/* Button standardization */
+button,
+input[type="button"] {
+    @include button-base;
+}
+
+.tabBtnAzul {
+    width: 100%;
+    margin-bottom: $spacing-lg;
+    @include button-primary;
+    @include button-size($button-height-lg);
+}
+
+.tabBtnVer {
+    width: 100%;
+    margin-bottom: $spacing-lg;
+    @include button-secondary;
+    @include button-size($button-height-lg);
+}
+
+#TabVisual{ display: flex; justify-content: space-between; padding: 25px 35px 10px 35px; }
+
+/* ==================== COMMON LIST ITEM STYLES ==================== */
+.usuario-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  background: $color-cream-20;
+  border: none;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $color-cream-40;
+    transform: translateX(4px);
+  }
+
+  &:active {
+    background: $color-cream-60;
+  }
+
+  .usuario-info {
+    text-align: left;
+    flex: 1;
+  }
+
+  .usuario-nome {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin: 0 0 $spacing-xs 0;
+  }
+
+  .usuario-email {
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    margin: 0;
+  }
+
+  i {
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+  }
+}
+
+.agente-item {
+  padding: $spacing-md;
+  background-color: $color-neutral-0;
+  border: 1px solid $color-border-secondary;
+  border-radius: $border-radius-md;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $color-neutral-200;
+    border-color: $color-btn-primary;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .agente-nome {
+    margin: 0;
+    font-weight: 600;
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+  }
+
+  .agente-email {
+    margin: $spacing-xs 0 0 0;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+  }
+}
+
+/* ==================== ICON STYLES ==================== */
+.iconForm, .iconTarefa {
+  min-width: $size-icon-md;
+  max-width: $size-icon-md;
+  min-height: $size-icon-md;
+  max-height: $size-icon-md;
+  background-color: $color-btn-primary;
+  border: 1px solid $color-btn-primary-border;
+  border-radius: $border-radius-lg;
+  color: $color-neutral-0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  box-sizing: border-box;
+}

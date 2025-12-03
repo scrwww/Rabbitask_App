@@ -1,0 +1,190 @@
+@use 'sass:color';
+@use '../../../theme/variables' as *;
+@forward '../../../theme/variables';
+
+/* ==================== REUSABLE MIXINS ==================== */
+/* These are only compiled when used via @include */
+
+@mixin input-base {
+    background-color: $color-neutral-0;
+    border: 1px solid $color-border-secondary;
+    border-radius: $border-radius-md;
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+    font-family: inherit;
+    padding: $input-padding-v $input-padding-h;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+        color: $color-text-light;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: $color-brown-80;
+        box-shadow: 0 0 0 3px rgba(194, 142, 96, 0.1);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background-color: $color-neutral-200;
+    }
+}
+
+@mixin input-size($height) {
+    height: $height;
+    padding: $input-padding-v $input-padding-h;
+}
+
+@mixin button-base {
+    font-family: inherit;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    border: none;
+    border-radius: $border-radius-lg;
+    padding: $button-padding-v $button-padding-h;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: none;
+    box-sizing: border-box;
+    gap: $spacing-sm;
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+}
+
+@mixin button-primary {
+    @include button-base;
+    background-color: $color-btn-primary;
+    color: $color-neutral-0;
+    box-shadow: 0 4px 12px rgba(119, 168, 204, 0.3);
+
+    &:hover:not(:disabled) {
+        background-color: color.adjust($color-btn-primary, $lightness: -10%);
+        box-shadow: 0 6px 16px rgba(119, 168, 204, 0.4);
+        transform: translateY(-2px);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(119, 168, 204, 0.3);
+    }
+}
+
+@mixin button-secondary {
+    @include button-base;
+    background-color: $color-btn-secondary;
+    color: $color-neutral-0;
+    box-shadow: 0 4px 12px rgba(222, 145, 151, 0.3);
+
+    &:hover:not(:disabled) {
+        background-color: color.adjust($color-btn-secondary, $lightness: -10%);
+        box-shadow: 0 6px 16px rgba(222, 145, 151, 0.4);
+        transform: translateY(-2px);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(222, 145, 151, 0.3);
+    }
+}
+
+@mixin button-size($height) {
+    height: $height;
+}
+
+/* ==================== STATUS BADGE MIXIN ==================== */
+@mixin status-badge-base {
+    display: inline-block;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-full;
+    font-weight: 600;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+@mixin status-badge-completed {
+    @include status-badge-base;
+    background-color: $color-task-completed;
+    color: $color-neutral-0;
+    border: 1px solid $color-neutral-600;
+}
+
+@mixin status-badge-delayed {
+    @include status-badge-base;
+    background-color: $color-task-delayed;
+    color: $color-red-100;
+    border: 1px solid $color-red-60;
+}
+
+@mixin status-badge-pending {
+    @include status-badge-base;
+    background-color: $color-blue-40;
+    color: $color-blue-100;
+    border: 1px solid $color-blue-60;
+}
+
+/* ==================== TAG MIXIN ==================== */
+@mixin tag-base {
+    display: inline-block;
+    padding: $spacing-xs $spacing-md;
+    background-color: $color-blue-60;
+    color: $color-neutral-0;
+    border-radius: $border-radius-full;
+    font-size: $font-size-xs;
+    font-weight: 500;
+}
+
+/* ==================== MESSAGE/ALERT MIXINS ==================== */
+@mixin message-base {
+    padding: $spacing-md $spacing-lg;
+    border-radius: $border-radius-md;
+    font-weight: 500;
+}
+
+@mixin message-success {
+    @include message-base;
+    background-color: $color-alert-green;
+    color: $color-neutral-0;
+    border: 1px solid $color-neutral-600;
+}
+
+@mixin message-error {
+    @include message-base;
+    background-color: $color-task-delayed;
+    color: $color-red-100;
+    border: 1px solid $color-red-60;
+}
+
+@mixin message-info {
+    @include message-base;
+    background-color: $color-blue-40;
+    color: $color-blue-100;
+    border: 1px solid $color-blue-60;
+}
+
+/* ==================== SECTION STYLING MIXIN ==================== */
+@mixin section-card {
+    padding: $spacing-lg;
+    background-color: $color-neutral-200;
+    border-radius: $border-radius-md;
+    border-left: 4px solid $color-blue-60;
+}
+
+@mixin section-header {
+    margin: 0 0 $spacing-sm 0;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $color-blue-60;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}

@@ -1,0 +1,180 @@
+<ion-modal
+  #typeModal
+  [isOpen]="isModalOpen"
+  (ionModalDidDismiss)="onModalDismiss()">
+  <ng-template>
+    <ion-content class="modal-fullscreen">
+      <div class="modal-container">
+        <h2>Como você deseja usar o Rabbitask?</h2>
+        
+        <button 
+          class="type-option"
+          (click)="selectUserType(1, 'Comum')"
+          [class.selected]="cdTipoUsuario === 1">
+          <span class="icon">👤</span>
+          <h3>Usuário Comum</h3>
+          <p>Crie e gerencie suas próprias tarefas</p>
+        </button>
+
+        <button 
+          class="type-option"
+          (click)="selectUserType(2, 'Agente')"
+          [class.selected]="cdTipoUsuario === 2">
+          <span class="icon">👨‍💼</span>
+          <h3>Agente</h3>
+          <p>Gerencie tarefas de múltiplos usuários</p>
+        </button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-content [fullscreen]="true" *ngIf="!isModalOpen">
+  <div class="logo-section">
+    <img src="assets/logo/RabbitaskLogoDark.png" alt="Rabbitask" class="logo-small">
+    <h2>Rabbitask</h2>
+  </div>
+  <div class="Tab">
+    <form class="registration-form" (ngSubmit)="currentStep === 3 ? cadastrar() : goToNextStep()">
+      <header class="tabHeader">
+        <div class="step-indicator">
+          <span [class.active]="currentStep >= 1">1</span>
+          <span [class.active]="currentStep >= 2">2</span>
+          <span [class.active]="currentStep >= 3">3</span>
+        </div>
+      </header>
+
+      <div class="tabMain">
+        <div *ngIf="errorMessage" class="alert alert-error">
+          {{ errorMessage }}
+        </div>
+
+        <div *ngIf="successMessage" class="alert alert-success">
+          {{ successMessage }}
+        </div>
+
+        <!-- Step 1: Name and Email -->
+        <div *ngIf="currentStep === 1" class="form-step">
+          <h3 class="step-title">Dados Pessoais</h3>
+          
+          <div class="form-field">
+            <label for="nome" class="leftSide">Nome Completo</label>
+            <input 
+              type="text"
+              [(ngModel)]="nome" 
+              name="nome"
+              placeholder="Digite seu nome"
+              [disabled]="isLoading"
+              id="nome"
+              class="tabInput">
+          </div>
+
+          <div class="form-field">
+            <label for="email" class="leftSide">Email</label>
+            <input 
+              type="email"
+              [(ngModel)]="email" 
+              name="email"
+              placeholder="Digite seu email"
+              [disabled]="isLoading"
+              id="email"
+              class="tabInput">
+          </div>
+
+          <div class="form-field">
+            <label for="confirmEmail" class="leftSide">Confirmar Email</label>
+            <input 
+              type="email"
+              [(ngModel)]="confirmEmail" 
+              name="confirmEmail"
+              placeholder="Confirme seu email"
+              [disabled]="isLoading"
+              id="confirmEmail"
+              class="tabInput">
+          </div>
+        </div>
+
+        <!-- Step 2: Phone -->
+        <div *ngIf="currentStep === 2" class="form-step">
+          <h3 class="step-title">Telefone</h3>
+          
+          <div class="form-field">
+            <label for="telefone" class="leftSide">Telefone</label>
+            <input 
+              type="tel"
+              [(ngModel)]="telefone" 
+              name="telefone"
+              placeholder="Digite seu telefone"
+              [disabled]="isLoading"
+              id="telefone"
+              class="tabInput">
+          </div>
+
+          <div class="form-field">
+            <label for="confirmTelefone" class="leftSide">Confirmar Telefone</label>
+            <input 
+              type="tel"
+              [(ngModel)]="confirmTelefone" 
+              name="confirmTelefone"
+              placeholder="Confirme seu telefone"
+              [disabled]="isLoading"
+              id="confirmTelefone"
+              class="tabInput">
+          </div>
+        </div>
+
+        <!-- Step 3: Password -->
+        <div *ngIf="currentStep === 3" class="form-step">
+          <h3 class="step-title">Senha</h3>
+          
+          <div class="form-field">
+            <label for="senha" class="leftSide">Senha</label>
+            <input 
+              type="password"
+              [(ngModel)]="senha" 
+              name="senha"
+              placeholder="Crie uma senha (mín. 8 caracteres)"
+              [disabled]="isLoading"
+              id="senha"
+              class="tabInput">
+          </div>
+
+          <div class="form-field">
+            <label for="confirmSenha" class="leftSide">Confirmar Senha</label>
+            <input 
+              type="password"
+              [(ngModel)]="confirmSenha" 
+              name="confirmSenha"
+              placeholder="Confirme sua senha"
+              [disabled]="isLoading"
+              id="confirmSenha"
+              class="tabInput">
+          </div>
+        </div>
+      </div>
+
+      <div class="tabButtons">
+        <button 
+          type="button" 
+          class="tabBtnSecondary" 
+          *ngIf="currentStep > 1"
+          (click)="goToPreviousStep()"
+          [disabled]="isLoading">
+          Voltar
+        </button>
+        
+        <button 
+          type="submit" 
+          class="tabBtnAzul" 
+          [disabled]="isLoading">
+          <span *ngIf="currentStep < 3">Próximo</span>
+          <span *ngIf="currentStep === 3">{{ isLoading ? 'Processando...' : 'Cadastrar' }}</span>
+        </button>
+      </div>
+
+      <div>
+        <p class="signup-text">Já tem uma conta? <a [routerLink]="['/home']">Faça login</a></p>
+      </div>
+    </form>
+  </div>
+</ion-content>

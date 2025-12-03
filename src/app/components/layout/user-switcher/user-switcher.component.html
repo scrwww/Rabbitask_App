@@ -1,0 +1,14 @@
+<div class="user-switcher" *ngIf="usuarioConectado">
+  <div class="user-switcher-content">
+    <button class="btn-voltar" (click)="voltarParaMeuUsuario()" title="Voltar para seu próprio usuário">
+      <i class="bi bi-chevron-left"></i>
+      <span>Voltar</span>
+    </button>
+    
+    <div class="usuario-info">
+      <p class="usuario-label">Gerenciando:</p>
+      <p class="usuario-nome">{{ usuarioConectado.nmUsuario }}</p>
+      <p class="usuario-email">{{ usuarioConectado.email }}</p>
+    </div>
+  </div>
+</div>

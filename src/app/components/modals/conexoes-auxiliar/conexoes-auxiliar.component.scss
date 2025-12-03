@@ -1,0 +1,200 @@
+@use 'sass:color';
+@use '../../../../theme/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.conexoes-container {
+  max-width: 100%;
+  min-height: fit-content;
+}
+
+// Message display - uses shared animation
+.mensagem {
+  padding: $spacing-md $spacing-lg;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-xl;
+  font-weight: 500;
+  animation: slideIn 0.3s ease-in;
+}
+
+.mensagem-success {
+  background-color: $color-alert-green;
+  color: $color-neutral-0;
+  border: 1px solid $color-neutral-600;
+}
+
+.mensagem-error {
+  background-color: $color-task-delayed;
+  color: $color-red-100;
+  border: 1px solid $color-red-60;
+}
+
+.mensagem-info {
+  background-color: $color-blue-40;
+  color: $color-blue-100;
+  border: 1px solid $color-blue-60;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// Main sections
+.secao-conexoes {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.subsecao {
+  border: 1px solid $color-border-secondary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  background-color: $color-neutral-200;
+
+  h3 {
+    margin: 0 0 $spacing-md 0;
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-btn-primary;
+    border-bottom: 2px solid $color-btn-primary;
+    padding-bottom: $spacing-sm;
+  }
+}
+
+// Empty/Loading states
+.empty-state, .loading {
+  text-align: center;
+  padding: $spacing-lg;
+  color: $color-text-light;
+}
+
+.empty-state { font-style: italic; }
+.loading { color: $color-text-secondary; }
+
+// Usuarios list - extends shared .usuario-item from _common.scss
+.usuarios-list, .agentes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+// Disconnect button
+.btn-desconectar {
+  @include button-base;
+  background-color: $color-red-60;
+  color: white;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  flex-shrink: 0;
+  margin-left: $spacing-md;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust($color-red-60, $lightness: -10%);
+  }
+}
+
+// Connect form
+.btn-container { margin: 10px 0; }
+.btn-conectar { width: 100%; }
+
+.connect-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-confirmar, .btn-cancelar {
+  @include button-base;
+  flex: 1;
+  padding: 10px;
+}
+
+.btn-confirmar {
+  background-color: $color-btn-primary;
+  color: white;
+}
+
+.btn-cancelar {
+  background-color: $color-neutral-400;
+  color: $color-text-primary;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust($color-neutral-400, $lightness: -10%);
+  }
+}
+
+// Code generation
+.descricao {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  margin: 0 0 $spacing-lg 0;
+}
+
+.btn-gerar-codigo {
+  @include button-primary;
+  width: 100%;
+}
+
+.codigo-gerado-box {
+  margin-top: $spacing-lg;
+  padding: $spacing-lg;
+  background-color: $color-neutral-200;
+  border: 2px dashed $color-blue-60;
+  border-radius: $border-radius-md;
+}
+
+.codigo-label {
+  margin: 0 0 $spacing-sm 0;
+  font-weight: 600;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+}
+
+.codigo-display {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.codigo-text {
+  flex: 1;
+  padding: $spacing-sm $spacing-md;
+  background-color: $color-neutral-0;
+  border: 1px solid $color-border-secondary;
+  border-radius: $border-radius-sm;
+  font-family: monospace;
+  font-weight: 600;
+  color: $color-text-primary;
+  word-break: break-all;
+}
+
+.btn-copiar {
+  @include button-primary;
+  white-space: nowrap;
+  padding: $spacing-sm $spacing-lg;
+}
+
+.codigo-expiracao {
+  margin: $spacing-sm 0;
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+}
+
+.btn-fechar {
+  @include button-base;
+  background-color: $color-neutral-400;
+  color: $color-text-primary;
+  width: 100%;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust($color-neutral-400, $lightness: -10%);
+  }
+}

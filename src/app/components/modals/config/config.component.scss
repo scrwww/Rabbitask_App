@@ -1,0 +1,73 @@
+@use '../../../../theme/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+// Config-specific styling
+.config-section {
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid $color-neutral-200;
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+
+    h3 {
+        font-size: $font-size-sm;
+        font-weight: 600;
+        color: $color-text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0 0 $spacing-lg 0;
+        padding: 0 $spacing-lg;
+    }
+}
+
+.config-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    padding: $spacing-md $spacing-lg;
+    margin: 0 $spacing-lg $spacing-sm 0;
+    background: $color-neutral-200;
+    border: none;
+    border-radius: $border-radius-lg;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    text-align: left;
+
+    &:hover {
+        background: $color-neutral-300;
+        transform: translateX(4px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+        transform: translateX(2px);
+    }
+
+    p {
+        margin: 0;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        color: $color-text-primary;
+    }
+}
+
+.logout-item {
+    background: $color-red-20;
+    border: 1px solid $color-red-40;
+
+    &:hover {
+        background: $color-red-40;
+    }
+
+    p {
+        color: $color-red-100;
+    }
+
+    .iconForm {
+        background-color: $color-red-60;
+        border-color: $color-red-100;
+    }
+}

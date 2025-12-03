@@ -1,0 +1,9 @@
+<div *ngIf="isOverseeing" class="oversee-indicator">
+  <div class="indicator-content">
+    <span class="viewing-label">Visualizando:</span>
+    <span class="user-name">{{ overseeingUserName }}</span>
+  </div>
+  <button class="btn-go-back" (click)="goBackToOwnTasks()">
+    Voltar
+  </button>
+</div>

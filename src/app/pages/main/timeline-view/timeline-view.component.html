@@ -1,0 +1,36 @@
+<div class="timeline-view">
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="dayGroups.length === 0">
+    <p>Nenhuma tarefa para exibir na timeline</p>
+  </div>
+
+  <!-- Timeline Container -->
+  <div class="timeline-container" *ngIf="dayGroups.length > 0">
+    <!-- Vertical Line -->
+    <div class="timeline-line"></div>
+
+    <!-- Day Groups -->
+    <div class="day-group" *ngFor="let group of dayGroups; let isLast = last">
+      <!-- Day Marker -->
+      <div class="day-marker">
+        <div class="day-circle">
+          <span class="day-number">{{ group.dayLabel }}</span>
+          <span class="day-month">{{ group.monthLabel }}</span>
+        </div>
+      </div>
+
+      <!-- Tasks for this day -->
+      <div class="day-tasks">
+        <div 
+          *ngFor="let task of group.tasks"
+          class="timeline-task"
+          [class.completed]="isCompleted(task)">
+          <app-tarefas 
+            [tarefas]="[task]" 
+            [tarefaCSS]="getTaskCSS(task)">
+          </app-tarefas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

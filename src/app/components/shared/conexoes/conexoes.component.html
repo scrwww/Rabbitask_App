@@ -1,0 +1,36 @@
+<div class="conexoes-overlay" *ngIf="visible" (click)="onFechar()"></div>
+<div class="conexoes-modal" *ngIf="visible">
+  <header class="conexoes-header">
+    <h2>Selecionar Usuário</h2>
+    <button class="btn-fechar" (click)="onFechar()">✕</button>
+  </header>
+
+  <div class="conexoes-content">
+    <div *ngIf="carregando" class="conexoes-loading">
+      <p>Carregando usuários...</p>
+    </div>
+
+    <div *ngIf="erro" class="conexoes-erro">
+      <p>{{ erro }}</p>
+      <button (click)="carregarUsuariosConectados()">Tentar Novamente</button>
+    </div>
+
+    <div *ngIf="!carregando && !erro && usuariosConectados.length === 0" class="conexoes-vazio">
+      <p>Nenhum usuário conectado</p>
+    </div>
+
+    <div class="usuarios-lista" *ngIf="!carregando && !erro && usuariosConectados.length > 0">
+      <button
+        *ngFor="let usuario of usuariosConectados"
+        class="usuario-item"
+        (click)="selecionarUsuario(usuario)"
+      >
+        <div class="usuario-info">
+          <p class="usuario-nome">{{ usuario.nome }}</p>
+          <p class="usuario-email">{{ usuario.email }}</p>
+        </div>
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>

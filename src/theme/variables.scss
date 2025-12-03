@@ -1,2 +1,174 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+@use 'sass:color';
+
+// ==================== PRIMARY COLORS ====================
+// Blue palette
+$color-blue-100: #1C6EA9;
+$color-blue-80: #4A8BBA;
+$color-blue-60: #77A8CC;
+$color-blue-40: #A4C5DD;
+$color-blue-20: #D2E2EE;
+
+// Light blue palette
+$color-light-blue-100: #ADDBED;
+$color-light-blue-80: #BDE2F1;
+$color-light-blue-60: #CEE9F4;
+$color-light-blue-40: #DEF1F8;
+$color-light-blue-20: #EFF8FB;
+
+// Brown palette
+$color-brown-100: #A97241;
+$color-brown-80: #C28E60;
+$color-brown-60: #D1AA87;
+$color-brown-40: #E0C6AF;
+$color-brown-20: #F0E3D7;
+
+// Cream palette
+$color-cream-100: #EAD5B0;
+$color-cream-80: #EEDDC0;
+$color-cream-60: #F2E6D0;
+$color-cream-40: #F7EEDF;
+$color-cream-20: #FBF7EF;
+
+// Red palette
+$color-red-100: #C84852;
+$color-red-80: #D36D75;
+$color-red-60: #DE9197;
+$color-red-40: #E9B6BA;
+$color-red-20: #F4DADC;
+
+// Neutral palette
+$color-neutral-0: #FFFFFF;
+$color-neutral-200: #F9FAFC;
+$color-neutral-300: #F4F4F8;
+$color-neutral-400: #E3E4EB;
+$color-neutral-500: #CACBD4;
+$color-neutral-600: #A8A9B2;
+$color-neutral-700: #717188;
+$color-neutral-800: #323241;
+$color-neutral-1000: #000000;
+
+// Alert colors
+$color-alert-green: #A5D692;
+$color-alert-yellow: #FFD569;
+$color-alert-red: #C84852;
+
+// ==================== SEMANTIC COLORS ====================
+$color-bg-main: $color-cream-20;
+$color-text-primary: $color-neutral-800;
+$color-text-secondary: $color-neutral-700;
+$color-text-light: $color-neutral-600;
+$color-text-lighter: $color-neutral-200;
+
+$color-border-primary: $color-brown-60;
+$color-border-secondary: $color-brown-40;
+
+// Task status colors
+$color-task-delayed: $color-red-20;
+$color-task-delayed-icon-bg: $color-red-40;
+$color-task-delayed-icon-border: $color-red-60;
+
+$color-task-pending: $color-cream-40;
+$color-task-pending-icon-bg: $color-cream-80;
+$color-task-pending-icon-border: $color-brown-40;
+
+$color-task-completed: $color-neutral-500;
+$color-task-completed-icon-bg: $color-neutral-600;
+$color-task-completed-icon-border: $color-neutral-700;
+
+// Button colors
+$color-btn-primary: $color-blue-60;
+$color-btn-primary-border: $color-blue-100;
+$color-btn-secondary: $color-red-60;
+$color-btn-neutral: $color-brown-60;
+
+// Footer colors
+$color-footer-bg: $color-blue-80;
+$color-footer-btn-bg: $color-blue-60;
+$color-footer-btn-border: $color-blue-100;
+
+// Tab colors
+$color-tab-bg: $color-light-blue-60;
+$color-tab-label-bg: $color-neutral-400;
+$color-tab-label-text: $color-neutral-700;
+$color-tab-input: $color-neutral-800;
+
+// Link color
+$color-link: $color-brown-80;
+
+// Shadows
+$color-shadow: rgba(0, 0, 0, 0.25);
+$color-shadow-light: rgba(0, 0, 0, 0.15);
+$color-shadow-white-light: rgba(255, 255, 255, 0.05);
+
+// ==================== SPACING & SIZING ====================
+// Padding/Margin standardization
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 20px;
+$spacing-2xl: 24px;
+$spacing-3xl: 30px;
+$spacing-4xl: 40px;
+
+// Border radius standardization
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-xl: 15px;
+$border-radius-2xl: 20px;
+$border-radius-full: 200px;
+
+// Font size standardization
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 24px;
+
+// Line height standardization
+$line-height-xs: 15px;
+$line-height-sm: 18px;
+$line-height-md: 20px;
+$line-height-lg: 23px;
+$line-height-xl: 30px;
+
+// Component sizing
+$size-icon-sm: 24px;
+$size-icon-md: 32px;
+$size-icon-lg: 44px;
+
+$size-button-sm: 31px;
+$size-button-md: 34px;
+$size-button-lg: 39px;
+
+$size-input-height: 36px;
+$size-input-padding: 8px;
+
+// Width constants
+$width-search-box: 90%;
+$width-button-container: 80%;
+
+// ==================== STANDARDIZED INPUT SIZES ====================
+$input-height-sm: 36px;
+$input-height-md: 44px;
+$input-height-lg: 52px;
+
+$input-padding-v: 10px;
+$input-padding-h: 12px;
+
+// ==================== STANDARDIZED BUTTON SIZES ====================
+$button-height-sm: 36px;
+$button-height-md: 44px;
+$button-height-lg: 52px;
+
+$button-padding-v: 12px;
+$button-padding-h: 20px;
+
+:root{
+    --ion-color-warning: #{$color-cream-20};
+}
+

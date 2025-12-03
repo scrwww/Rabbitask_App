@@ -1,0 +1,130 @@
+<div id="TabConexoes" class="Tab">
+  <div class="conexoes-container">
+    <!-- Message display -->
+    <div *ngIf="mensagem" class="mensagem" [ngClass]="'mensagem-' + mensagem.type">
+      {{ mensagem.text }}
+    </div>
+
+    <!-- AGENTE: Managed Users Section -->
+    <div *ngIf="isAgente" class="secao-conexoes">
+      
+      <!-- Meus usuários conectados -->
+      <div class="subsecao">
+        <h3>Meus Usuários Conectados</h3>
+        
+        <div *ngIf="carregando" class="loading">
+          Carregando...
+        </div>
+
+        <div *ngIf="!carregando && usuariosGerenciados.length === 0" class="empty-state">
+          Nenhum usuário conectado ainda.
+        </div>
+
+        <div *ngIf="!carregando && usuariosGerenciados.length > 0" class="usuarios-list">
+          <div 
+            *ngFor="let usuario of usuariosGerenciados" 
+            class="usuario-item"
+            (click)="selectUserToOversee(usuario)">
+            <div class="usuario-info">
+              <p class="usuario-nome">{{ usuario.nmUsuario }}</p>
+              <p class="usuario-email">{{ usuario.email }}</p>
+            </div>
+            <button 
+              class="btn-desconectar" 
+              type="button"
+              title="Desconectar"
+              (click)="disconnectUser(usuario); $event.stopPropagation()">
+              ✕
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conectar usuário -->
+      <div class="subsecao">
+        <h3>Conectar Usuário</h3>
+        
+        <div *ngIf="!showConnectInput" class="btn-container">
+          <button class="btn-conectar" (click)="showConnectForm()">
+            + Adicionar Conexão
+          </button>
+        </div>
+
+        <div *ngIf="showConnectInput" class="connect-form">
+          <input 
+            type="text" 
+            [(ngModel)]="codigoConexao" 
+            placeholder="Digite o código de conexão"
+            class="input-codigo"
+            [disabled]="carregando">
+          
+          <div class="form-buttons">
+            <button 
+              class="btn-confirmar" 
+              (click)="connectWithCode()"
+              [disabled]="carregando">
+              {{ carregando ? 'Conectando...' : 'Confirmar' }}
+            </button>
+            <button 
+              class="btn-cancelar" 
+              (click)="cancelConnect()"
+              [disabled]="carregando">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMUM: Agents and Code Generation Section -->
+    <div *ngIf="isComum" class="secao-conexoes">
+      
+      <!-- Gerar código -->
+      <div class="subsecao">
+        <h3>Gerar Código</h3>
+        
+        <p class="descricao">
+          Compartilhe um código com seu agente para que ele possa gerenciar suas tarefas.
+        </p>
+
+        <button 
+          class="btn-gerar-codigo" 
+          (click)="generateConnectionCode()"
+          [disabled]="carregando">
+          {{ carregando ? 'Gerando...' : 'Gerar Novo Código' }}
+        </button>
+
+        <!-- Display generated code -->
+        <div *ngIf="codeState !== 'hidden'" class="codigo-gerado-box">
+          <p class="codigo-label">Código de Conexão:</p>
+          <div class="codigo-display">
+            <span class="codigo-text">{{ codigoGerado }}</span>
+            <button class="btn-copiar" (click)="copyCode()">Copiar</button>
+          </div>
+          <p class="codigo-expiracao">⏱️ Expira em: <strong>{{ tempoFormatado }}</strong></p>
+          <button class="btn-fechar" (click)="hideGeneratedCode()">Fechar</button>
+        </div>
+      </div>
+
+      <!-- Meus agentes -->
+      <div *ngIf="meusAgentes.length > 0" class="subsecao">
+        <h3>Meus Agentes</h3>
+        
+        <div *ngIf="carregando" class="loading">
+          Carregando...
+        </div>
+        
+        <div *ngIf="!carregando" class="agentes-list">
+          <div *ngFor="let agente of meusAgentes" class="agente-item">
+            <p class="agente-nome">{{ agente.nmUsuario }}</p>
+            <p class="agente-email">{{ agente.email }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="meusAgentes.length === 0 && !carregando" class="empty-state">
+        Você ainda não tem agentes conectados.
+      </div>
+    </div>
+  </div>
+</div>

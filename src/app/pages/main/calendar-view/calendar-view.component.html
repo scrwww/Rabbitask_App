@@ -1,0 +1,92 @@
+<div class="calendar-view-container">
+  <!-- Calendar Header -->
+  <div class="calendar-header">
+    <button class="nav-button" (click)="previousMonth()">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+    <div class="month-year">
+      {{ monthNames[calendar.month] }} {{ calendar.year }}
+    </div>
+    <button class="nav-button" (click)="nextMonth()">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Day names header -->
+  <div class="day-names">
+    <div class="day-name" *ngFor="let day of dayNames">{{ day }}</div>
+  </div>
+
+  <!-- Calendar grid -->
+  <div class="calendar-grid">
+    <div *ngFor="let week of calendar.weeks" class="week">
+      <div
+        *ngFor="let day of week"
+        class="calendar-day"
+        [ngClass]="{
+          'other-month': !day.isCurrentMonth,
+          'today': isToday(day),
+          'selected': isSelected(day),
+          'has-tasks': getTaskCountForDay(day.date) > 0
+        }"
+        (click)="selectDate(day)">
+        <div class="day-number">{{ day.day }}</div>
+        <div class="task-dots" *ngIf="getTaskCountForDay(day.date) > 0">
+          <span class="dot" *ngFor="let i of getTaskDotsArray(day.date)"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Selected date tasks -->
+  <div *ngIf="selectedDate" class="selected-date-section">
+    <div class="selected-date-header">
+      <h3>{{ getSelectedDateDisplay() }}</h3>
+    </div>
+
+    <div *ngIf="selectedDateTasks.length === 0" class="empty-state">
+      Nenhuma tarefa neste dia
+    </div>
+
+    <div *ngIf="selectedDateTasks.length > 0" class="tasks-list">
+      <!-- Delayed Tasks Section -->
+      <ion-card color="warning" *ngIf="getTasksAtrasadas().length > 0">
+        <ion-card-header>
+          <ion-card-title>Tarefas Atrasadas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <app-tarefas
+            [tarefas]="getTasksAtrasadas()"
+            [tarefaCSS]="Atrasada">
+          </app-tarefas>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Pending Tasks Section -->
+      <ion-card color="warning" *ngIf="getTasksPendentes().length > 0">
+        <ion-card-header>
+          <ion-card-title>Tarefas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <app-tarefas
+            [tarefas]="getTasksPendentes()"
+            [tarefaCSS]="Pendente">
+          </app-tarefas>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Completed Tasks Section -->
+      <ion-card color="warning" *ngIf="getTasksConcluidas().length > 0">
+        <ion-card-header>
+          <ion-card-title>Tarefas Concluídas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <app-tarefas
+            [tarefas]="getTasksConcluidas()"
+            [tarefaCSS]="Concluida">
+          </app-tarefas>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</div>

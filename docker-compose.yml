@@ -1,0 +1,32 @@
+services:
+  # Note: Database and API services are running locally.
+  # Database: localhost:3306
+  # API: localhost:5000
+  # This compose file only runs the Angular frontend in a container.
+
+  # Rabbitask Angular App
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        API_URL: ${API_URL:-https://localhost:5000/api}
+    container_name: rabbitask_app
+    environment:
+      ANGULAR_API_URL: ${API_URL:-https://localhost:5000/api}
+    ports:
+      - "8100:80"
+    networks:
+      - rabbitask_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  rabbitask_network:
+    driver: bridge

@@ -1,0 +1,93 @@
+.conexoes-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 199;
+}
+
+.conexoes-modal {
+  position: fixed;
+  bottom: 90px;
+  left: 0;
+  right: 0;
+  background: $color-tab-bg;
+  border-radius: $border-radius-lg $border-radius-lg 0 0;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.conexoes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-xl;
+  border-bottom: 1px solid $color-neutral-200;
+
+  h2 {
+    font-size: $font-size-md;
+    margin: 0;
+    color: $color-text-primary;
+  }
+
+  .btn-fechar {
+    background: none;
+    border: none;
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: $color-cream-20;
+      border-radius: $border-radius-md;
+    }
+  }
+}
+
+.conexoes-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-lg;
+}
+
+.conexoes-loading,
+.conexoes-erro,
+.conexoes-vazio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  text-align: center;
+  color: $color-text-secondary;
+
+  p {
+    margin: 0 0 $spacing-md 0;
+  }
+
+  button {
+    background: $color-btn-primary;
+    color: white;
+    border: none;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    font-size: $font-size-xs;
+  }
+}
+
+.usuarios-lista {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}

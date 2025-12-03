@@ -1,0 +1,165 @@
+@use '../../../../theme/variables' as *;
+@use 'sass:color';
+
+.kanban-view {
+  padding: $spacing-md;
+  height: calc(100vh - 180px); // Account for header and footer
+  overflow: hidden;
+}
+
+.kanban-container {
+  display: flex;
+  gap: $spacing-md;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: $spacing-md;
+  // Add padding to center first and last columns
+  padding-left: calc(50% - 140px);
+  padding-right: calc(50% - 140px);
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-cream-40;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-blue-60;
+    border-radius: 4px;
+
+    &:hover {
+      background: $color-blue-80;
+    }
+  }
+}
+
+.kanban-column {
+  flex: 0 0 280px;
+  min-width: 280px;
+  max-width: 280px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: $color-cream-20;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  scroll-snap-align: center;
+  overflow: hidden;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 2px solid;
+  flex-shrink: 0;
+
+  h3 {
+    margin: 0;
+    font-size: $font-size-md;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  .task-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 $spacing-sm;
+    border-radius: $border-radius-full;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $color-neutral-0;
+  }
+}
+
+// Column-specific colors
+.column-delayed {
+  .column-header {
+    border-color: $color-red-60;
+    background: $color-red-20;
+
+    .task-count {
+      background: $color-red-60;
+    }
+  }
+}
+
+.column-pending {
+  .column-header {
+    border-color: $color-cream-100;
+    background: $color-cream-40;
+
+    .task-count {
+      background: $color-brown-60;
+    }
+  }
+}
+
+.column-completed {
+  .column-header {
+    border-color: $color-neutral-600;
+    background: $color-neutral-400;
+
+    .task-count {
+      background: $color-neutral-600;
+    }
+  }
+}
+
+.column-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-md;
+
+  // Custom scrollbar for column content
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-neutral-500;
+    border-radius: 3px;
+
+    &:hover {
+      background: $color-neutral-600;
+    }
+  }
+
+  // Override tarefas component styles for kanban
+  :host ::ng-deep .tarefa {
+    margin-bottom: $spacing-sm;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.empty-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: $color-text-light;
+  font-size: $font-size-sm;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}

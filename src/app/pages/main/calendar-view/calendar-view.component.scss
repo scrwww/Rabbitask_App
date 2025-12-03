@@ -1,0 +1,220 @@
+@use 'sass:color';
+@use '../../../../theme/variables' as *;
+
+.calendar-view-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 100%;
+  padding: $spacing-lg;
+  box-sizing: border-box;
+}
+
+/* Calendar Header */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+
+  .nav-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: $color-text-primary;
+    padding: $spacing-sm;
+    border-radius: $border-radius-md;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $color-cream-20;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .month-year {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-text-primary;
+    min-width: 200px;
+    text-align: center;
+  }
+}
+
+/* Day names header */
+.day-names {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xs;
+  padding: 0 $spacing-md;
+  box-sizing: border-box;
+
+  .day-name {
+    text-align: center;
+    font-weight: 600;
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+    padding: $spacing-sm;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+/* Calendar grid */
+.calendar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  background-color: $color-brown-40;
+  padding: $spacing-md;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  .week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: $spacing-xs;
+  }
+}
+
+/* Calendar day */
+.calendar-day {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius-md;
+  background-color: $color-neutral-300;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+
+  &.other-month {
+    opacity: 0.4;
+    cursor: default;
+
+    .day-number {
+      color: $color-text-light;
+    }
+
+    &:hover {
+      background-color: $color-neutral-200;
+      transform: none;
+    }
+  }
+
+  &.today {
+    background-color: color.adjust($color-brown-80, $lightness: 5%);
+    color: $color-neutral-0;
+    font-weight: 600;
+
+    .day-number {
+      color: $color-neutral-0;
+      font-weight: 700;
+    }
+
+    .dot {
+      background-color: $color-neutral-0;
+    }
+  }
+
+  &.selected {
+    border-color: $color-brown-80;
+    background-color: color.adjust($color-brown-80, $lightness: 10%);
+    box-shadow: 0 4px 12px rgba(194, 142, 96, 0.2);
+
+    .day-number {
+      color: $color-brown-80;
+      font-weight: 700;
+    }
+  }
+
+  &.has-tasks:not(.selected):not(.today) {
+    background-color: color.adjust($color-cream-20, $lightness: 2%);
+  }
+
+  &:hover:not(.other-month) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active:not(.other-month) {
+    transform: translateY(0);
+  }
+
+  .day-number {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $color-text-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  .task-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: $color-btn-primary;
+      opacity: 0.5;
+      transition: all 0.2s ease;
+
+      &.visible {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* Selected date section */
+.selected-date-section {
+  margin-top: $spacing-lg;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $color-border-secondary;
+
+  .selected-date-header {
+    margin-bottom: $spacing-md;
+
+    h3 {
+      color: $color-text-primary;
+      font-size: $font-size-lg;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: $spacing-lg $spacing-md;
+    color: $color-text-secondary;
+    font-style: italic;
+  }
+
+  .tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+}
+
+/* Ion-card styling for calendar view */
+.selected-date-section ion-card {
+  margin: 0;
+}

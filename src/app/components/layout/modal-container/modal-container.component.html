@@ -1,0 +1,24 @@
+<div id="Blockage" (click)="modalStateService.closeAllModals()" *ngIf="(modalStateService.showBlockingOverlay$ | async)"></div>
+
+<ng-container *ngIf="modalStateService.activeModal$ | async as activeModal">
+  <!-- Modal: Task Detail -->
+  <app-tarefa-detalhe *ngIf="activeModal === 'TarefaDetalhe'"></app-tarefa-detalhe>
+
+  <!-- Modal: Edit Task -->
+  <app-edit-tarefa *ngIf="activeModal === 'EditTarefa'"></app-edit-tarefa>
+
+  <!-- Modal: New Task -->
+  <app-nova-tarefa *ngIf="activeModal === 'NovaTarefa'"></app-nova-tarefa>
+
+  <!-- Modal: Visualization -->
+  <app-tab-visual *ngIf="activeModal === 'Visual'"></app-tab-visual>
+
+  <!-- Modal: Account -->
+  <app-tab-conta *ngIf="activeModal === 'Conta'"></app-tab-conta>
+
+  <!-- Modal: Configuration -->
+  <app-config *ngIf="activeModal === 'Config'"></app-config>
+
+  <!-- Modal: Connections -->
+  <app-conexoes-auxiliar *ngIf="activeModal === 'Conexoes'"></app-conexoes-auxiliar>
+</ng-container>
