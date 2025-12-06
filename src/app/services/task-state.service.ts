@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { map, tap, shareReplay, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest, interval, Subscription } from 'rxjs';
+import { map, tap, shareReplay, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { TasksService, TarefaDto, GetTarefasParams, CreateTarefaRequest, UpdateTarefaRequest, ApiResponse } from './tasks.service';
 import { UserContextFacade } from './user-context.facade';
 import { TaskCategories } from '../shared/dtos/task.dtos';
@@ -64,6 +64,16 @@ export class TaskStateService {
   searchQuery$: Observable<string> = this.searchQuerySubject.asObservable();
 
   /**
+   * Track the current polling interval subscription
+   */
+  private pollingSubscription: Subscription | null = null;
+
+  /**
+   * Track the current user ID for polling
+   */
+  private currentUserId: number | null = null;
+
+  /**
    * Observable stream of filtered and categorized tasks
    * Combines task cache with search query to produce filtered results
    */
@@ -89,6 +99,7 @@ export class TaskStateService {
   /**
    * Initialize task loading
    * Automatically loads tasks when active user changes (handles oversee switching)
+   * Also starts polling for task changes every 2 seconds
    */
   initialize(): void {
     this.userContextFacade.activeUserForTasks$
@@ -97,9 +108,58 @@ export class TaskStateService {
       )
       .subscribe(userId => {
         if (userId) {
+          this.currentUserId = userId;
           this.loadTasksForUser(userId);
+          this.startPolling(userId);
         }
       });
+  }
+
+  /**
+   * Start polling for task changes every 2 seconds
+   * Automatically refreshes task list to reflect changes made by other users/agents
+   * 
+   * @param userId The user ID to poll tasks for
+   */
+  private startPolling(userId: number): void {
+    // Stop any existing polling
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
+    }
+
+    // Poll every 2 seconds (2000ms)
+    this.pollingSubscription = interval(2000)
+      .pipe(
+        switchMap(() => {
+          const fullParams: GetTarefasParams = {
+            cdUsuario: userId,
+            pagina: 1,
+            paginaTamanho: 100
+          };
+          return this.tasksService.getTarefas(fullParams);
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          if (response.success) {
+            this.taskCacheSubject.next(response.data);
+          }
+        },
+        error: (err) => {
+          console.warn('Error polling tasks:', err);
+          // Don't expose polling errors to avoid cluttering the error banner
+        }
+      });
+  }
+
+  /**
+   * Stop polling for task changes
+   */
+  private stopPolling(): void {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
+      this.pollingSubscription = null;
+    }
   }
 
   /**
@@ -313,10 +373,12 @@ export class TaskStateService {
    * Called during logout to ensure clean state for next user
    */
   clearCache(): void {
+    this.stopPolling();
     this.taskCacheSubject.next([]);
     this.loadingSubject.next(false);
     this.errorSubject.next(null);
     this.searchQuerySubject.next('');
+    this.currentUserId = null;
   }
 
   /**

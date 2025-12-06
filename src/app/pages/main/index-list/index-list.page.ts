@@ -21,13 +21,13 @@ import { TaskCategories } from 'src/app/shared/dtos/task.dtos';
 
 /**
  * IndexListPage - Main task list view
- * 
+ *
  * This is the primary page for displaying user tasks. It coordinates:
  * - User context and oversee state (via UserContextFacade)
  * - View mode switching between list and calendar (via ViewStateService)
  * - Task data and categorization (via TaskStateService)
  * - Modal display for task creation/editing (via ModalStateService)
- * 
+ *
  * The page follows a reactive pattern where all data is exposed via observables
  * and rendered using the async pipe in templates.
  */

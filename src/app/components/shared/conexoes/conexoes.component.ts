@@ -57,7 +57,7 @@ export class ConexoesComponent implements OnInit {
   }
 
   selecionarUsuario(usuario: UsuarioResumo) {
-    this.overseeService.setOverseeing(usuario.cd);
+    this.overseeService.setOverseeing(usuario.cd, usuario.nome);
     this.usuarioSelecionado.emit(usuario);
     this.fechar.emit();
   }
